@@ -1,11 +1,16 @@
 import express from 'express';
+import authRoutes from './routes/authRoutes';
+import MessageRoutes from './routes/messageRoutes';
+
 const app = express();
-const port = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+app.use(express.json());
 
-app.listen(port, () => {
-  return console.log(`Express 4 is listening at http://localhost:${port}`);
-});
+// Middleware pour l'authentification si nécessaire
+// app.use(authMiddleware);
+
+app.use('/api', MessageRoutes);
+
+// Vous pouvez ajouter d'autres routes ici
+
+export default app;

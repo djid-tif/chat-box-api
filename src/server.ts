@@ -4,7 +4,12 @@ import app from './app';
 import { initializeSocket } from './sockets';
 
 const server = http.createServer(app);
-const io = new SocketIOServer(server);
+const io = new SocketIOServer(server, {
+  cors: {
+    origin: "*",  // Ceci permettra à toutes les origines de se connecter
+    methods: ["GET", "POST"]  // Autorise seulement les méthodes GET et POST pour CORS
+  }
+});
 
 initializeSocket(io);
 
